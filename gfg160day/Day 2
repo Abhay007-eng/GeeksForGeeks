@@ -1,0 +1,13 @@
+🚀 Day 2. Move All Zeroes to End 🧠
+💡 Problem Description:
+Given an array arr[], move all the zeros in the array to the end while maintaining the relative order of non-zero elements. The modification should be done in-place.
+
+class Solution:
+    def pushZerosToEnd(self, arr):
+        n = len(arr)
+        nonZeroIndex = 0
+
+        for i in range(n):
+            if arr[i] != 0:
+                arr[nonZeroIndex], arr[i] = arr[i], arr[nonZeroIndex]
+                nonZeroIndex += 1
