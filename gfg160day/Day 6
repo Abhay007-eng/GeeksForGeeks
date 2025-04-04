@@ -1,0 +1,56 @@
+Day 6. Majority Element II 🧠
+
+💡 Problem Description:
+You are given an array of integers arr[] where each number represents a vote for a candidate. Return the candidates that have votes greater than one-third of the total votes. If there's no majority vote, return an empty array.
+
+Note: The answer should be returned in an increasing order.
+
+🔍 Example Walkthrough:
+Input:
+arr[] = [2, 1, 5, 5, 5, 5, 6, 6, 6, 6, 6]
+Output:
+[5, 6]
+
+Explanation:
+5 and 6 occur more than n / 3 times in the array.
+
+Input:
+arr[] = [1, 2, 3, 4, 5]
+Output:
+[]
+
+Explanation:
+No candidate occurs more than n / 3 times.
+
+Code (Python)
+class Solution:
+    def findMajority(self, arr):
+        num1, num2, c1, c2 = None, None, 0, 0
+        n = len(arr)
+        for x in arr:
+            if x == num1:
+                c1 += 1
+            elif x == num2:
+                c2 += 1
+            elif c1 == 0:
+                num1 = x
+                c1 = 1
+            elif c2 == 0:
+                num2 = x
+                c2 = 1
+            else:
+                c1 -= 1
+                c2 -= 1
+        c1, c2 = 0, 0
+        for x in arr:
+            if x == num1:
+                c1 += 1
+            elif x == num2:
+                c2 += 1
+        res = []
+        if c1 > n // 3:
+            res.append(num1)
+        if c2 > n // 3:
+            res.append(num2)
+        res.sort()
+        return res
