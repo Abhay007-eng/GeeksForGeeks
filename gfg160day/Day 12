@@ -1,0 +1,50 @@
+🚀 Day 12. Max Circular Subarray Sum 🧠
+
+💡 Problem Description:
+Given an array of integers arr[] in a circular fashion, return the maximum sum of a subarray that can be obtained assuming the array is circular.
+
+Note: The solution should account for both regular and circular subarrays.
+
+🔍 Example Walkthrough:
+Input:
+arr[] = [8, -8, 9, -9, 10, -11, 12]
+Output:
+22
+
+Explanation:
+Starting from the last element of the array, i.e., 12, and moving in a circular fashion, the maximum subarray is [12, 8, -8, 9, -9, 10], which gives the maximum sum of 22.
+
+Input:
+arr[] = [10, -3, -4, 7, 6, 5, -4, -1]
+Output:
+23
+
+Explanation:
+Maximum sum of the circular subarray is 23. The subarray is [7, 6, 5, -4, -1, 10].
+
+Solution:
+
+def circularSubarraySum(arr):
+    total_sum = 0
+    max_sum = float('-inf')
+    min_sum = float('inf')
+    curr_max = 0
+    curr_min = 0
+    all_negative = True
+
+    for num in arr:
+        total_sum += num
+
+        curr_max = max(num, curr_max + num)
+        max_sum = max(max_sum, curr_max)
+
+        curr_min = min(num, curr_min + num)
+        min_sum = min(min_sum, curr_min)
+
+        if num > 0:
+            all_negative = False
+
+    if all_negative:
+        return max_sum
+
+    return max(max_sum, total_sum - min_sum)
