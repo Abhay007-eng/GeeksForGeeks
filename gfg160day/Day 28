@@ -1,0 +1,32 @@
+Number of Occurrences 🧠
+
+💡 Problem Description:
+Given a sorted array arr[] and a number target, determine the number of occurrences of target in the array.
+
+If the number does not exist in the array, return 0.
+
+🔍 Example Walkthrough:
+Input:
+arr[] = [1, 1, 2, 2, 2, 2, 3], target = 2
+Output:
+4
+
+Explanation:
+2 occurs 4 times in the array.
+
+Input:
+arr[] = [1, 1, 2, 2, 2, 2, 3], target = 4
+Output:
+0
+
+Explanation:
+4 is not present in the array.
+
+SOLUTION
+
+class Solution:
+    def countFreq(self, arr, target):
+        import bisect
+        lower = bisect.bisect_left(arr, target)
+        upper = bisect.bisect_right(arr, target)
+        return (upper - lower) if lower < len(arr) and arr[lower] == target else 0
